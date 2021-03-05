@@ -29,8 +29,6 @@ def course_callback(update: Update, context: CallbackContext) -> int:
         else:
             url = context.user_data['last_url'] + url
 
-    query.edit_message_text(text=f"Selected option: {url}")
-
     if url.find('category=') != -1 or len(url) <= 36:
         studium_out = StudiumScraper.get_cats(url)
     elif url.find('/courses/') != -1:

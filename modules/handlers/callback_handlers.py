@@ -23,13 +23,10 @@ def course_callback(update: Update, context: CallbackContext) -> int:
 
     if not url.startswith('http'):
         if context.user_data['base_url'] == None:
-            print('BASE URL')
             url = "https://studium.unict.it" + url
         elif url.startswith('/'):
-            print('SLASH URL')
             url = context.user_data['base_url'] + url
         else:
-            print(f'LAST URL: {url}')
             url = context.user_data['last_url'] + url
 
     query.edit_message_text(text=f"Selected option: {url}")

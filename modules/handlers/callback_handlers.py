@@ -104,4 +104,4 @@ def shift_menu_index_up(update: Update, context: CallbackContext) -> None:
     """
     context.user_data['shift_menu_index'] -= config_map['max_buttons']
     generate_keyboard(update=update.callback_query, context=context,
-                      studium_out=context.user_data['last_studium_out'], message_text='Seleziona l\'anno accademico')
+                      studium_out=context.user_data['last_studium_out'], message_text='Seleziona l\'opzione desiderata')

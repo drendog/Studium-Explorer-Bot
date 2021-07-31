@@ -34,8 +34,10 @@ class StudiumScraper:
         year_all_soup = soup.find_all('option')
 
         for year_soup in year_all_soup:
-            text_list.append(year_soup.get_text())
-            url_list.append(year_soup['value'])
+            # this check because on old years the bug has been fixed
+            if year_soup['value'].find('/studium.unict.it') != -1 or year_soup['value'].startswith('/'):
+                text_list.append(year_soup.get_text())
+                url_list.append(year_soup['value'])
 
         return cls(text_list, url_list)
 
@@ -65,12 +67,13 @@ class StudiumScraper:
 
     @classmethod
     def get_files_list(cls, url: str):
-        """get list of files on current url
+        """
+        get list of files on current url
 
         Args:
             url (str): url of current folder
 
-        """        
+        """
         doc_path = 'document/' if url.find('/document') == - \
             1 and not url.startswith('/') else ''
         url = url + doc_path
@@ -97,7 +100,7 @@ class StudiumScraper:
 
         Returns:
             str: safe path
-        """        
+        """
         courses_path_index = path.find('/courses/')
         document_path_index = path.find('/document/')
 
@@ -116,7 +119,7 @@ class StudiumScraper:
 
         Returns:
             str: optimized text
-        """        
+        """
         if text.endswith('/'):
             text = '📂 ' + text[:-1]
         return text
